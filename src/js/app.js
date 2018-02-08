@@ -26,24 +26,23 @@ App = {
   initWeb3: function() {
     // Is there an injected web3 instance?
 if (typeof web3 !== 'undefined') {
-alert('one');
+alert('Web3 initialized');
   App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
   //App.web3Provider = web3.currentProvider;
 } else {
-alert('two');
+alert('Before connecting to testrpc');
   // If no injected web3 instance is detected, fall back to Ganache
   App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
 }
 web3 = new Web3(App.web3Provider);
-alert('three');
+alert('Before initializing contract');
     return App.initContract();
   },
 
   initContract: function() {
-   alert('initcontract');
    $.getJSON('Adoption.json', function(data) {
   // Get the necessary contract artifact file and instantiate it with truffle-contract
-   alert('loadedinitcontract');
+   alert('Contract loaded');
   var AdoptionArtifact = data;
   App.contracts.Adoption = TruffleContract(AdoptionArtifact);
 
@@ -81,7 +80,7 @@ App.contracts.Adoption.deployed().then(function(instance) {
   },
 
   handleAdopt: function(event) {
-   alert('handleadopt');
+   alert('Handling adopt event');
     event.preventDefault();
 
     var petId = parseInt($(event.target).data('id'));
